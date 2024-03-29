@@ -15,23 +15,23 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppUserMapper {
 	
-	@Autowired
-	private PasswordEncoder encoder;
-	@Autowired
-	private PasswordEncoder encode;
+//	@Autowired
+//	private PasswordEncoder encoder;
+//	@Autowired
+//	private PasswordEncoder encode;
 	
-	//convert userdetails to appuser
-	public AppUser convertToAppUser(UserDetails userDetails) {
-		String username = userDetails.getUsername();
-		String password = encode.encode(userDetails.getPassword());
-		AppUser appUser =  new AppUser();
-		appUser.setUsername(username);
-		appUser.setPassword(password);
-		
-		return appUser;
-
-	}
-	
+//	//convert userdetails to appuser
+//	public AppUser convertToAppUser(UserDetails userDetails) {
+//		String username = userDetails.getUsername();
+//		String password = encode.encode(userDetails.getPassword());
+//		AppUser appUser =  new AppUser();
+//		appUser.setUsername(username);
+//		appUser.setPassword(password);
+//		
+//		return appUser;
+//
+//	}
+//	
 	//from db to frontend
 	//convert appuser to userdetails
 	public UserDetails convertToUserDetails(AppUser appUser) {
