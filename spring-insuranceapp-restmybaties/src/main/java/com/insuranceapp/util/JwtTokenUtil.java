@@ -1,4 +1,4 @@
-package com.insurance.util;
+package com.insuranceapp.util;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
 public class JwtTokenUtil {
+
 
 	private static final long serialVersionUID = -2550185165626007488L;
 

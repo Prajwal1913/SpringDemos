@@ -21,65 +21,68 @@ import com.insuranceapp.model.ApiErrors;
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
+
 	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex,
-		HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.valueOf(status.value());
-		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(), statusMessage);
-		headers.add("error", "method not found");
+			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.valueOf(status.value());
+		ApiErrors errors = new ApiErrors(timestamp, status.value(), 
+				ex.getMessage(),statusMessage );
+		headers.add("error", "method not allowed");
 		return ResponseEntity.status(status).headers(headers).body(errors);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMediaTypeNotSupported(HttpMediaTypeNotSupportedException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.valueOf(status.value());
-		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(), statusMessage);
-		headers.add("error", "media type not found");
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.valueOf(status.value());
+		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(),statusMessage );
+		headers.add("error", "Media Type Not Supported ");
 		return ResponseEntity.status(status).headers(headers).body(errors);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleMissingPathVariable(MissingPathVariableException ex, HttpHeaders headers,
 			HttpStatusCode status, WebRequest request) {
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.valueOf(status.value());
-		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(), statusMessage);
-		headers.add("error", "missing path variable not found");
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.valueOf(status.value());
+		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(),statusMessage );
+		headers.add("error", "Missing path variable");
 		return ResponseEntity.status(status).headers(headers).body(errors);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleMissingServletRequestParameter(MissingServletRequestParameterException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.valueOf(status.value());
-		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(), statusMessage);
-		headers.add("error", "servlet missing error");
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.valueOf(status.value());
+		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(),statusMessage );
+		headers.add("error", "Missing Servlet Request Parameter ");
 		return ResponseEntity.status(status).headers(headers).body(errors);
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException ex, HttpHeaders headers,
 			HttpStatusCode status, WebRequest request) {
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.valueOf(status.value());
-		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(), statusMessage);
-		headers.add("error", "type missmatch error");
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.valueOf(status.value());
+		ApiErrors errors = new ApiErrors(timestamp, status.value(), ex.getMessage(),statusMessage );
+		headers.add("error", "Type Mismatch");
 		return ResponseEntity.status(status).headers(headers).body(errors);
 	}
 	
+	
 	@ExceptionHandler(InsuranceNotFoundException.class)
 	public ResponseEntity<Object> handleInsuranceNotFound(InsuranceNotFoundException ex){
-		LocalDateTime timestamp =  LocalDateTime.now();
-		HttpStatus  statusMessage = HttpStatus.BAD_REQUEST;
-		ApiErrors errors = new ApiErrors(timestamp, statusMessage.value(), ex.getMessage(), statusMessage);
+		LocalDateTime timestamp =LocalDateTime.now();
+		HttpStatus statusMessage = HttpStatus.BAD_REQUEST;
+		ApiErrors errors = new ApiErrors(timestamp,statusMessage.value(), ex.getMessage(),statusMessage );
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("error", "insurance not found");
+		headers.add("error", "Ins not found");
 		return ResponseEntity.status(statusMessage).headers(headers).body(errors);
-		
 	}
+
 
 }
